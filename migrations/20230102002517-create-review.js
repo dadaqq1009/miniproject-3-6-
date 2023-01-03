@@ -3,17 +3,21 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Reviews', {
-      review_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT.UNSIGNED
       },
       guest_id: {
-        type: Sequelize.STRING
+        allowNull: false,
+        references: { model: "Guests", key: "id" },
+        type: Sequelize.BIGINT.UNSIGNED,
       },
       owner_id: {
-        type: Sequelize.STRING
+        allowNull: false,
+        references: { model: "Owners", key: "id" },
+        type: Sequelize.BIGINT.UNSIGNED,
       },
       rate: {
         type: Sequelize.STRING

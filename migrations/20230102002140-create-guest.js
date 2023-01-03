@@ -3,23 +3,28 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Guests', {
-      guest_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT.UNSIGNED
       },
       login_id: {
+        allowNull: false,
+        unique: true,
         type: Sequelize.STRING
       },
       guest_name: {
-        type: Sequelize.STRING
+        allowNull: false,
+        unique: true,
+        type: Sequelize.STRING(10)
       },
       guest_email: {
         type: Sequelize.STRING
       },
       login_pw: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(50)
       },
       guest_point: {
         type: Sequelize.INTEGER

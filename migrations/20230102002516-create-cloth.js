@@ -3,33 +3,35 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Cloths', {
-      cloth_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT.UNSIGNED
       },
       guest_id: {
-        type: Sequelize.STRING
-        
-      },
-      owner_id: {
-        type: Sequelize.STRING
+        allowNull: false,
+        references: { model: "Guests", key: "id" },
+        type: Sequelize.BIGINT.UNSIGNED
       },
       tel: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(50)
       },
       address: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(100)
       },
       ask: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(100)
       },
       img: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM("waiting", "active", "finished"),
+        defaultValue: "waiting"
       },
       createdAt: {
         allowNull: false,

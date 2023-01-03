@@ -3,20 +3,25 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Owners', {
-      owner_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT.UNSIGNED
       },
       login_id: {
+        allowNull: false,
+        unique: true,
         type: Sequelize.STRING
       },
       login_pw: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(50)
       },
       owner_name: {
-        type: Sequelize.STRING
+        allowNull: false,
+        unique: true,
+        type: Sequelize.STRING(10)
       },
       owner_email: {
         type: Sequelize.STRING
