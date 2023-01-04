@@ -11,10 +11,14 @@ const authMiddleWare = require("../middlewares/auth-middleware");
 const app = express();
 app.use(cookieParser());
 
-// 사장님 전체 리뷰 조회
-router.get("/review/:ownerId", authMiddleWare, async (req, res) => {
+
+
+router.get("/review/:guestId", authMiddleWare, async (req, res) => {
   try {
-    const posts = await Review.findAll({ order: [["createdAt", "desc"]] });
+    const guestId = req.params.guestId;
+
+
+    const posts = await Guest.findAll({ where: [] });
     // 오류 예제
     // try catch 있을때/없을때
     // const posts = await NonexistentCollection.find({});
@@ -32,7 +36,7 @@ router.get("/review/:ownerId", authMiddleWare, async (req, res) => {
 //db guest table login_id unique 로 설정
 // guest_id + owner_id + cloth_id 
 router.post("/review/:guestId", authMiddleWare, async (req, res) => {
-  const {guestId} = req.params; //<--guest의 login_id
+  const guestId = req.params.guestId; //<--guest의 login_id
   const {rate , comment} = req.body;
   const guest_Id_token = res.locals.guest.login_id;
   const owner_id = Owner.owner_id;
