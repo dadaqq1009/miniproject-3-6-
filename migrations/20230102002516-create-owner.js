@@ -7,21 +7,16 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.BIGINT.UNSIGNED
+        type: Sequelize.INTEGER
       },
       login_id: {
-        allowNull: false,
-        unique: true,
         type: Sequelize.STRING
       },
       login_pw: {
-        allowNull: false,
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING
       },
       owner_name: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING(10)
+        type: Sequelize.STRING
       },
       owner_email: {
         type: Sequelize.STRING

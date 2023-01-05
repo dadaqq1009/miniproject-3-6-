@@ -7,43 +7,37 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.BIGINT.UNSIGNED
+        type: Sequelize.INTEGER
       },
       guest_id: {
-        allowNull: false,
-        // references: { model: "Guests", key: "guest_id" },
-        type: Sequelize.BIGINT.UNSIGNED
+        type: Sequelize.STRING
+        
       },
       owner_id: {
-        allowNull: false,
-        // references: { model: "Owners", key: "owner_id" },
-        type: Sequelize.BIGINT.UNSIGNED
+        type: Sequelize.STRING
       },
       tel: {
-        allowNull: false,
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING
       },
       address: {
-        allowNull: false,
-        type: Sequelize.STRING(100)
+        type: Sequelize.STRING
       },
       ask: {
-        allowNull: false,
-        type: Sequelize.STRING(100)
+        type: Sequelize.STRING
       },
       img: {
-        type: Sequelize.STRING(500)
+        type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.STRING(10)
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
-        defaultValue: Sequelize.fn('NOW')
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        defaultValue: Sequelize.fn('NOW')
+        type: Sequelize.DATE
       }
     });
   },

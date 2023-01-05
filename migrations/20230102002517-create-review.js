@@ -7,17 +7,13 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.BIGINT.UNSIGNED
+        type: Sequelize.INTEGER
       },
       guest_id: {
-        allowNull: false,
-        // references: { model: "Guests", key: "guest_id" },
-        type: Sequelize.BIGINT.UNSIGNED,
+        type: Sequelize.STRING
       },
       owner_id: {
-        allowNull: false,
-        // references: { model: "Owners", key: "owner_id" },
-        type: Sequelize.BIGINT.UNSIGNED,
+        type: Sequelize.STRING
       },
       rate: {
         type: Sequelize.STRING

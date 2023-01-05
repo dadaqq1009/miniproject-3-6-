@@ -7,24 +7,19 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.BIGINT.UNSIGNED
+        type: Sequelize.INTEGER
       },
       login_id: {
-        allowNull: false,
-        unique: true,
         type: Sequelize.STRING
       },
       guest_name: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING(10)
+        type: Sequelize.STRING
       },
       guest_email: {
         type: Sequelize.STRING
       },
       login_pw: {
-        allowNull: false,
-        type: Sequelize.STRING(100)
+        type: Sequelize.STRING
       },
       guest_point: {
         type: Sequelize.INTEGER
