@@ -24,7 +24,7 @@ module.exports = {
       },
       login_pw: {
         allowNull: false,
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING(100)
       },
       guest_point: {
         type: Sequelize.INTEGER

@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // 예시코드
-      models.Owner.hasMany(models.Cloth);
-      models.Owner.hasMany(models.Review)
+      models.Owner.hasMany(models.Cloth, {foreignKey : "owner_id"});
+      models.Owner.hasMany(models.Review, {foreignKey : "owner_id"});
   }
 }
   Owner.init({

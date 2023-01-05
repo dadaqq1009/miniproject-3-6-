@@ -11,7 +11,12 @@ module.exports = {
       },
       guest_id: {
         allowNull: false,
-        references: { model: "Guests", key: "guest_id" },
+        // references: { model: "Guests", key: "guest_id" },
+        type: Sequelize.BIGINT.UNSIGNED
+      },
+      owner_id: {
+        allowNull: false,
+        // references: { model: "Owners", key: "owner_id" },
         type: Sequelize.BIGINT.UNSIGNED
       },
       tel: {
@@ -30,16 +35,15 @@ module.exports = {
         type: Sequelize.STRING(500)
       },
       status: {
-        type: Sequelize.ENUM("waiting", "active", "finished"),
-        defaultValue: "waiting"
+        type: Sequelize.STRING(10)
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.fn('NOW')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.fn('NOW')
       }
     });
   },
