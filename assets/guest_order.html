@@ -26,37 +26,42 @@ nav{display:block; float:left;}
 <body>
 <div class="flex_center">
   <h1 style="position:absolute; top:100px; text-align:center;">🧺세탁물 상태페이지🧺</h1>
-  <form action="" method="">
+
     <nav class="input-table">
       <div class="mb-3" id="nickName">
-        <!-- <label for="exampleInputEmail1" class="form-label">닉네임</label> -->
-        <!-- <input type="email" class="form-control" id="exampleInputEmail1" placeholder="닉네임" aria-describedby="emailHelp"> -->
+       
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">전화번호</label>
-        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="전화번호" aria-describedby="emailHelp">
+        <input type="text" name="tel" class="form-control" id="exampleInputEmail2" placeholder="전화번호" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">주소</label>
-        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="주소" aria-describedby="emailHelp">
+        <input type="text" name="address" class="form-control" id="exampleInputEmail3" placeholder="주소" aria-describedby="emailHelp">
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">요청사항</label>
-        <input type="email" class="form-control" id="exampleInputEmail4" placeholder="요청사항" aria-describedby="emailHelp">
+        <input type="text" name="ask" class="form-control" id="exampleInputEmail4" placeholder="요청사항" aria-describedby="emailHelp">
       </div>
     </nav>
 
     <nav class="image-table">
+     
       <img id="preview" src="https://web.ipca.pt/sap/wp-content/codevision/resources/images/no-image.jpg">
-      <input type="file" id="inputFile" onchange="readURL(this);" style="display:none;">
+      <!-- <form id="file_form" class="form-horizontal"  method="POST"  enctype = "multipart/form-data" > -->
+      <input type="file" id="inputFile" name="img" onchange="readURL(this);" style="display:none;">
+      <!-- </form> -->
       <label for="inputFile" class="btn btn-secondary" style="width:200px; margin-top: 20px;">사진선택</label>
+ 
       <div id="button-req">
-        <button type="button" class="btn btn-dark" style="width:200px;" onclick="save_order()">신청하기</button>
+        <button type="submit" name="submit" class="btn btn-dark" style="width:200px;"  onclick="save_order()" >신청하기</button>
       </div>
+ 
     </nav>
-  </form>
+ 
 </div>
 </body>
+
 <script type="text/javascript">
 const input = document.querySelector('#myFileInput');
 const preview = document.querySelector('#myImage');
@@ -90,6 +95,8 @@ function readURL(input) {
       integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
       crossorigin="anonymous"
     ></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 
 <script>
   const url = window.location.search;
@@ -100,16 +107,47 @@ function readURL(input) {
     getOwnerName(login_id);
 
 
+  //   $('.form-horizontal').submit(function(e){
+  //    e.preventDefault();
+     
+  //    const tel = $("#exampleInputEmail2").val();
+  //       const address = $("#exampleInputEmail3").val();
+  //       const ask = $("#exampleInputEmail4").val();
+  //       const status = "대기중"
+     
+  //    $(this).ajaxSubmit({
+  //      data: {
+  //           tel : tel,
+  //           address : address,
+  //           ask : ask,
+  //           status : status,
+  //           guest_id : guest_id,
+  //         },
+  //      contentType: 'application/json',
+  //      success: function(response){
+  //       alert(JSON.stringify(response))
+  //             window.location.replace(`/mypage/guest?login_id=${login_id}`);   
+  //      }
+  //  });});
 
+  
 function save_order() {
         const tel = $("#exampleInputEmail2").val();
         const address = $("#exampleInputEmail3").val();
         const ask = $("#exampleInputEmail4").val();
         const status = "대기중"
+        console.log(5)
+        console.log(guest_id)
+
+        // var form = $('#file_form')[0];
+        // console.log(form)
+        // var formData = new FormData(form);
+        // console.log(formData)
+
 
         $.ajax({
           type: "POST",
-          url: `/api/order/guest?login_id=${login_id}`,
+          url: `/api/order/guest`,
           data: {
             tel : tel,
             address : address,
@@ -128,6 +166,54 @@ function save_order() {
         });
       };
 
+   $(document).ready(function () {
+   $(document).on("click", "button[name='submit']", function () {
+    console.log(123) })});
+
+
+
+
+// $(document).ready(function () {
+//   $(document).on("click", "button[name='submit']", function () {
+    
+    
+    // $(document).ready(function() {
+    // $("#file_form").submit(function() {
+    //     var data = new FormData($('#file_form')[0]);
+
+  //   function save_order() {
+  //     console.log(6)
+  //     console.log(guest_id)
+  //       const input_file = document.getElementById('file_form').submit();
+  // console.log(input_file);
+  // console.log(input_file.tel)
+  // let data = new FormData(input_file);
+  //   console.log(data);
+
+  //       console.log(5)
+  //   const guest_id = guest_id 
+        
+  //       $.ajax({
+  //           url:'/api/order/guest',
+  //           type: 'POST',
+  //           contentType: false,
+  //           processData: false,
+  //           cache: false,
+  //           data: data,
+  //           success: function(res){
+  //               alert(res);
+  //           },
+  //           error: function(){
+  //               alert('Error: In sending the request!');
+  //           }
+  //       })
+  //     };
+//     });
+// });
+
+  // })});
+
+
       function getOwnerName(login_id) {
   $.ajax({
     type: "GET",
@@ -137,7 +223,8 @@ function save_order() {
     // },
     success: function (response) {
 
-      window.guest_id = String(response.guestPk);
+      window.guest_id = String(response.guest_id);
+      console.log(guest_id)
       
 
       let temp_html = `<label for="exampleInputEmail1" class="form-label">닉네임: ${response.guestName}</label>`

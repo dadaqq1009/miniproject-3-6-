@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 
+
 const guestRegisterRouter = require("./routers/guest_register");
 const ownerRegisterRouter = require("./routers/owner_register");
 const guestLoginRouter = require("./routers/guest_login");
@@ -8,13 +9,15 @@ const ownerLoginRouter = require("./routers/owner_login");
 const guestMypageRouter = require("./routers/guest_mypage");
 const ownerMypageRouter = require("./routers/owner_mypage");
 const ownerStatusRouter = require("./routers/laundry_status");
-const guestStatusRouter = require("./routers/guest_order_status");
 const guestOrderRouter = require("./routers/guest_order");
 const ownerOrderRouter = require("./routers/owner_order");
+const guestStatusRouter = require("./routers/guest_order_status");
 
 // const ownerRegisterRouter = require("./routers/owner_register");
 
 app.use(express.json());
+
+app.use(express.urlencoded({extended : false}));
 
 require('dotenv').config();
 
@@ -75,6 +78,8 @@ app.get('/order/status/guest', (req, res) => {
 app.get('/order/owner', (req, res) => {
     res.sendFile(__dirname + "/assets/owner_order.html");
 });
+
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Example app listening on port ${process.env.PORT}`);

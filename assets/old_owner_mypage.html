@@ -1,36 +1,85 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-  crossorigin="anonymous"
-/>
-<title>🧺사장님 마이페이지🧺</title>
-</head>
-<style>
-*{margin:0; padding:0;}
-html,body{width:100%; height:100%;}
-body{background-image:url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg"); background-repeat:no-repeat; background-size:cover;}
-.flex_center{display:flex; align-items:center; justify-content:center; width:100%; height:100%;}
-.status{border-radius: 50%; background-color: #6D67E4; width: 400px; height: 400px;}
-.btn-warning{margin: 20px; padding: 30px; border-radius: 10%; font-size: 30px; font-weight: bold;}
-.top-bar{}
-</style>
-<body>
-<div class="flex_center">
-  <h1 style="position:absolute; top:100px; text-align:center;">🧺사장님 마이페이지🧺</h1>
-  <nav id="guestInfo"class="top-bar" style="position:absolute; top:200px; right: 250px; text-align:center; float: right; display: inline-block;">
-    
-  </nav>
-    <button type="button" class="btn btn-warning" onclick="orderCollect(login_id)">세탁물 주문보기</button>
-    <button type="button" class="btn btn-warning" onclick="laundryStatus(login_id)">세탁물 상태변경</button>
-    <button type="button" class="btn btn-warning">리뷰 조회</button>
-</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <title>육개장 세탁소</title>
+  </head>
+  <style>
+    html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      /* background-image: url("https://cdn.pixabay.com/photo/2019/08/19/15/13/eiffel-tower-4416700__340.jpg"); */
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    div {
+      border: 1px solid blue;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    div > button {
+      width: 150px;
+      height: 80px;
+      margin-left: 100px;
+    }
+  </style>
+
+  <body>
+    <div>
+      <button 
+      type="button"
+      class="btn btn-primary btn-lg"
+      onclick="orderCollect(login_id)">
+      세탁물 수거 요청
+      </button>
+      
+      <button type="button"
+       class="btn btn-secondary btn-lg"
+       onclick="laundryStatus(login_id)">
+       세탁물 상태</button>
+
+
+       <button type="button"
+       class="btn btn-secondary btn-lg"
+       onclick="signOut()">
+       로그아웃</button>
+
+
+    </div>
+    <div id="guestInfo">
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -58,6 +107,9 @@ if (!localStorage.getItem("token")) {
     window.location.replace("/");
     // });
   } 
+
+
+
     
     const url = window.location.search;
     console.log(url)
@@ -76,10 +128,8 @@ function getOwnerPage(login_id) {
     // },
     success: function (response) {
 
-      let temp_html = `
-       <button type="button" class="btn btn-success">닉네임: ${response.ownerName} </button>
-    <button type="button" class="btn btn-success">마이포인트: ${response.ownerPoint}</button>
-    <button type="button" class="btn btn-success" onclick="signOut()">로그아웃</button> `
+      let temp_html = `<div class="status guestName">닉네임: ${response.ownerName} </div>
+       <div class="status guestPoint"> 마이 포인트: ${response.ownerPoint}</div> `
       $('#guestInfo').append(temp_html)
     // callback(response);
     },
@@ -113,5 +163,6 @@ alert("취소를 누르셨습니다.");
   };
 
 </script>
-</body>
+
+  </body>
 </html>
