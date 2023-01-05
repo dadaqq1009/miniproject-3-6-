@@ -15,9 +15,6 @@ const guestStatusRouter = require("./routers/guest_order_status");
 const guestReviewRouter = require("./routers/guest_review");
 const ownerReviewRouter = require("./routers/owner_review");
 
-
-// const ownerRegisterRouter = require("./routers/owner_register");
-
 app.use(express.json());
 
 app.use(express.urlencoded({extended : false}));

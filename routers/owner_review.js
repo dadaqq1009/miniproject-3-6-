@@ -56,16 +56,6 @@ router.get('/review/owner', async(req,res) =>{
       let guest_name = guest.guest_name
       guests.push(guest_name)
     }
-
-    // const guest = await Guest.findAll({where: {guest_id : guest_id }});
-
-    //const guest_name = guest.guest_name
-
-
-
-      // 오류 예제
-      // try catch 있을때/없을때
-      // const posts = await NonexistentCollection.find({});
   
       return res.send({"review" : review, "guests": guests });
     } catch (error) {

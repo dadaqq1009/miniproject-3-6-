@@ -66,14 +66,6 @@ router.get('/order/owner', async(req,res) =>{
           }
       });
 
-// router.put('/order/owner', async(req,res)=>{
-//   try{
-//       const cloth_put = await Cloth.update({status: "수거중",},{where :{status: "대기중"},});
-//       return res.send({"cloth_put" : cloth_put});
-//   } catch (error) {
-//         console.error(error);
-//         return res.status(500).send({ message: error.message });
-//   }
-// });
+
 
 module.exports = router;
