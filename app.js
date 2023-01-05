@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const router = express.Router();
 
 
 const guestRegisterRouter = require("./routers/guest_register");
@@ -17,23 +18,12 @@ const ownerReviewRouter = require("./routers/owner_review");
 
 app.use(express.json());
 
-app.use(express.urlencoded({extended : false}));
+app.use(express.urlencoded({extended : false}), router);
 
 require('dotenv').config();
 
-app.use("/api", express.urlencoded({extended: false}), [
-    guestRegisterRouter,
-    ownerRegisterRouter,
-    guestLoginRouter,
-    ownerLoginRouter,
-    guestMypageRouter,
-    ownerMypageRouter,
-    ownerStatusRouter,
-    guestOrderRouter,
-    ownerOrderRouter,
-    guestStatusRouter,
-    guestReviewRouter,
-    ownerReviewRouter
+app.use("/api", [ownerLoginRouter, ownerReviewRouter
+
   ]);
 
 app.get('/', (req, res) => {

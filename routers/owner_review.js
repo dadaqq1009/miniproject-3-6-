@@ -1,68 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const cookieParser = require("cookie-parser");
-const {Op} = require('sequelize');
-const {Owner} = require('../models');
-const {Guest} = require('../models');
-const {Review} = require('../models');
-const {Cloth} = require('../models');
+const authMiddleware = require('../middlewares/auth-middleware')
 
-const authMiddleWare = require("../middlewares/auth-middleware");
+
 
 const app = express();
 app.use(cookieParser());
 
-router.get('/review/owner', async(req,res) =>{
-  try {
-    const  ownerId =  String( req.query.login_id )
-    console.log(ownerId)
+const OwnerReviewController = require("../controllers/owner_review.controller");
+const ownerReviewController = new OwnerReviewController();
 
-    const owner = await Owner.findOne({
-      where: { login_id : ownerId },
-    });
-
-    console.log(owner)
-
-    console.log(owner.owner_id)
-
-    
-    // const ownerName = owner.owner_name
-    const owner_id = owner.owner_id
-
-
-    
-  const review = await Review.findAll({where: {owner_id : owner_id }});
-
-   let rows = review
-
-    let guests = []
-    let id_list =[]
-
-    console.log(555)
-
-    for (let i =0; i < rows.length; i++){
-      let row = rows[i]
-      let guest_id = row['guest_id']
-      id_list.push(guest_id)
-    };
-
-
-    for (let i =0; i < rows.length; i++){
-
-      let guest_id = id_list[i]
-      console.log(guest_id)
-      let guest = await Guest.findOne({where: {guest_id : guest_id }})
-      console.log(guest)
-      let guest_name = guest.guest_name
-      guests.push(guest_name)
-    }
-  
-      return res.send({"review" : review, "guests": guests });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).send({ message: error.message });
-    }
-  }); 
+router.get('/review/owner/:login_id', authMiddleware,  ownerReviewController.ownerR )
 
 
 
