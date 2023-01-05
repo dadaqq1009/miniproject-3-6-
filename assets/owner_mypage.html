@@ -29,7 +29,7 @@ body{background-image:url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistor
   </nav>
     <button type="button" class="btn btn-warning" onclick="orderCollect(login_id)">세탁물 주문보기</button>
     <button type="button" class="btn btn-warning" onclick="laundryStatus(login_id)">세탁물 상태변경</button>
-    <button type="button" class="btn btn-warning">리뷰 조회</button>
+    <button type="button" class="btn btn-warning" onclick="reviewPage(login_id)">리뷰 조회</button>
 </div>
 
     <!-- Optional JavaScript -->
@@ -110,6 +110,10 @@ alert("취소를 누르셨습니다.");
   
   function orderCollect(login_id){
     window.location.href = `/order/owner?login_id=${login_id}`
+  };
+
+  function reviewPage(login_id){
+    window.location.href = `/review/owner?login_id=${login_id}`
   };
 
 </script>

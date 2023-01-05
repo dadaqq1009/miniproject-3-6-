@@ -17,7 +17,7 @@
   $(document).ready(function(){
     listing();
   });
-​
+
   function listing() {
       $('#cards-box').empty()
       $.ajax({
@@ -32,9 +32,9 @@
                   let desc = rows[i]['desc']
                   let star = rows[i]['star']
                   let comment = rows[i]['comment']
-​
+
                   let star_image = '⭐'.repeat(star)
-​
+                  
                   let temp_html = `<div class="col">
                                       <div class="card h-100">
                                           <img src="${image}"
@@ -47,7 +47,7 @@
                                           </div>
                                       </div>
                                   </div>`
-​
+
                   $('#cards-box').append(temp_html)
               }
           }
@@ -67,7 +67,7 @@ body{background-image:url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistor
 <div class="flex_center">
   <h1 style="position:absolute; top:100px; text-align:center;">🧺리뷰 확인🧺</h1>
   </nav>
-  <div class="mb-4" style="width:calc(72rem + 177px); margin:150px 0 0 0;">
+  <div class="mb-4" id="review_card" style="width:calc(72rem + 177px); margin:150px 0 0 0;">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title" style="font-weight: bold;">초보프로그래머</h5><hr>
@@ -124,9 +124,72 @@ body{background-image:url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistor
           <p class="star">⭐</p>
         </div>
       </div>
-​
+
   </div>
   </div>
 </div>
+
+<script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+      integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+    
+        const url = window.location.search;
+    console.log(url)
+    const url_split = url.split('=')
+    const login_id = url_split[1]
+    console.log(login_id);
+    show_order(login_id);
+
+        function show_order(){
+            $.ajax({
+                type: "GET",
+                url: `/api/review/owner?login_id=${login_id}`,
+                data: {},
+                success: function (response) {
+                    console.log(response['review'])
+                    console.log(response['guests'])
+                    let rows = response['review']
+                    let name_rows = response['guests']
+                    for (let i =0; i < rows.length; i++){
+                        let rate = rows[i]['rate']
+                        let comment = rows[i]['comment']
+                        let time = rows[i]['createdAt']
+                        let guestName = name_rows[i]
+
+                        let temp_html = `
+       <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title" style="font-weight: bold;">${guestName}</h5><hr>
+          <p class="card-text">${comment}</p>
+          <p class="star">평점: ${rate}</p>
+          <p class="card-text">${time}</p>
+        </div>`
+                        
+                        $('#review_card').append(temp_html)
+                    }
+                }
+            });
+        }
+        function customAlert(text, confirmCallback) {
+        $("#alertText").text(text);
+        $("#alertModal").modal("show");
+        if (confirmCallback) {
+          $("#alertModal .btn-confirm").click(confirmCallback);
+        }
+      }
+    </script>
 </body>
 </html>

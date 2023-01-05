@@ -10,9 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // 예시코드
-      models.Cloth.belongsTo(models.Guest, { foreignKey: "guest_id"});
-      models.Cloth.belongsTo(models.Owner, { foreignKey: "owner_id"});
+      models.Cloth.belongsTo(models.Guest, {foreignKey:"guest_id"});
+      models.Cloth.belongsTo(models.Owner, {foreignKey:"owner_id"});
     }
   }
   Cloth.init({
@@ -24,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     owner_id: DataTypes.STRING,
     tel: DataTypes.INTEGER,
     address: DataTypes.STRING,
+    status: DataTypes.ENUM,
     ask: DataTypes.STRING,
     img: DataTypes.STRING,
     status: DataTypes.STRING

@@ -12,8 +12,9 @@ const ownerStatusRouter = require("./routers/laundry_status");
 const guestOrderRouter = require("./routers/guest_order");
 const ownerOrderRouter = require("./routers/owner_order");
 const guestStatusRouter = require("./routers/guest_order_status");
-const ownerReviewRouter = require("./routers/owner_review");
 const guestReviewRouter = require("./routers/guest_review");
+const ownerReviewRouter = require("./routers/owner_review");
+
 
 // const ownerRegisterRouter = require("./routers/owner_register");
 
@@ -34,8 +35,8 @@ app.use("/api", express.urlencoded({extended: false}), [
     guestOrderRouter,
     ownerOrderRouter,
     guestStatusRouter,
-    ownerReviewRouter,
-    guestReviewRouter
+    guestReviewRouter,
+    ownerReviewRouter
   ]);
 
 app.get('/', (req, res) => {
@@ -87,7 +88,7 @@ app.get('/review/owner', (req, res) => {
     res.sendFile(__dirname + "/assets/owner_review.html");
 });
 
-app.get('/review/owner', (req, res) => {
+app.get('/review/guest', (req, res) => {
     res.sendFile(__dirname + "/assets/guest_review.html");
 });
 

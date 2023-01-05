@@ -17,7 +17,7 @@ router.get('/order/status/guest',async (req, res) => {
           where: { login_id : guestId },
         });
         const guestPk = guest.guest_id;
-        const cloth = await Cloth.findOne({where: {guest_id : guestPk, status : {[Op.not]: "배송완료"}, owner_id : {[Op.not]: null}}});
+        const cloth = await Cloth.findOne({where: {guest_id : guestPk, status : {[Op.notIn]: ["리뷰중", "리뷰완료"]}, owner_id : {[Op.not]: null}}});
         const clothStatus = cloth.status;
 
         return res.json({"clothStatus" : clothStatus});
@@ -25,5 +25,24 @@ router.get('/order/status/guest',async (req, res) => {
         return res.status(400).send({ errorMessage: "실패하였습니다." });
       }
     });
+
+    router.put('/order/status/guest',async (req, res) => {
+      const guestId = String(req.query.login_id);
+      const {status} = req.body;
+
+      try {
+          const guest = await Guest.findOne({
+            where: { login_id : guestId },
+          });
+          const guestPk = guest.guest_id;
+          const cloth = await Cloth.findOne({where: {guest_id : guestPk, status : {[Op.notIn]: ["리뷰중", "리뷰완료"]}, owner_id : {[Op.not]: null}}});
+          
+          await cloth.update( {status: status});
+  
+          return res.json({"message": "이용해주셔서 감사합니다!"});
+        } catch (err) {
+          return res.status(400).send({ errorMessage: "실패하였습니다." });
+        }
+      });
     
     module.exports = router;

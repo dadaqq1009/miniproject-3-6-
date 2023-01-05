@@ -88,6 +88,11 @@ function getGuestPage(login_id) {
           },
   });};
 
+  function customAlert(text) {
+        $("#alertText").text(text);
+        $("#alertModal").modal("show");
+      };
+
   function orderStatus(login_id){
     window.location.href = `/order/status/guest?login_id=${login_id}`
   };
