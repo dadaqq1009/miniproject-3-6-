@@ -7,41 +7,48 @@ const {Cloth} = require('../models');
 router.get('/order/owner', async(req,res) =>{
     try {
         // const  ownerId =  String( req.query.login_id )
+        // console.log(ownerId)
         // const owner = await findOne({where: {owner_id: ownerId}});
         // const owner_id = owner.owner_id
 
         const cloth = await Cloth.findAll({where: {owner_id : null}});
 
-  //  let rows = cloth
-
-  //   let guests = []
-  //   let id_list =[]
-
-  //   console.log(555)
-
-  //   for (let i =0; i < rows.length; i++){
-  //     let row = rows[i]
-  //     let guest_id = row['guest_id']
-  //     id_list.push(guest_id)
-  //   };
+      let rows = cloth
 
 
-  //   for (let i =0; i < rows.length; i++){
+    let id_list =[]
 
-  //     let guest_id = id_list[i]
-  //     console.log(guest_id)
-  //     let guest = await Guest.findOne({where: {guest_id : guest_id }})
-  //     console.log(guest)
-  //     let guest_name = guest.guest_name
-  //     guests.push(guest_name)
-  //   }
-        // const name = await Guest.findAll({where: {guest_name : guest_name}})
+    for (let i =0; i < rows.length; i++){
+      let row = rows[i]
+      let guest_id = row['guest_id']
+      id_list.push(guest_id)
+    };
+
+    console.log(555)
+    console.log(id_list)
+
+    let guests = []
+
+    for (let i =0; i < rows.length; i++){
+      let guest_id = id_list[i]
+      console.log(guest_id)
+      let guest = await Guest.findOne({where: {guest_id : guest_id }})
+      console.log(guest)
+      let guest_name = guest.guest_name
+      guests.push(guest_name)
+    }
+
+    console.log(guests)
+    
+    //const name = await Guest.findAll({where: {guest_name : guest_name}})
+
+
 
         // 오류 예제
         // try catch 있을때/없을때
         // const posts = await NonexistentCollection.find({});
     
-        return res.send({"cloth" : cloth});
+        return res.send({"cloth" : cloth, "guests" : guests});
       } catch (error) {
         console.error(error);
         return res.status(500).send({ message: error.message });

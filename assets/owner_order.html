@@ -139,8 +139,6 @@ nav{display:block; float:left;}
 .image-table{padding-left:50px; margin-top: 40px;}
 #button-req{padding-top:10px;}
 
-
-
 </style>
 <body>
     <div id="order-box" class="test">
@@ -166,17 +164,16 @@ nav{display:block; float:left;}
     // click on 라벨 추가 모달 열기
 $(document).on('click', '#add-btn', function (e) {
   console.log("click event");
-  $('#modal').addClass('show');
-
+  $(e.target).next('.modal').addClass('show')
 });
 
 // 모달 닫기
 $(document).on('click', '#close_btn', function (e) {
   console.log("click event");
-  $('#modal').removeClass('show');
+  $(e.target).parents('.modal').removeClass('show')
 
 });
-  </script>
+</script>
 <script>
     const url = window.location.search;
     console.log(url)
@@ -192,34 +189,32 @@ $(document).on('click', '#close_btn', function (e) {
             success: function (response) {
                
                 let rows = response['cloth']
-                // let name_rows = response['guests']
+                let name_rows = response['guests']
                 console.log(rows)
                 let temp_html = ''
                   for (let i =0; i < rows.length; i++){
                     let tel = rows[i]['tel']
                     let address = rows[i]['address']
                     let ask = rows[i]['ask']
-                    // let guestName = name_rows[i]
-                    
+                    let name = name_rows[i]
                     
                     temp_html += `
-                    <div class="btn" id="add-btn"><img src="require('../assets/img/다운로드.jpg')">
-                    </div>
+                    <div>${name}</div>
+                    <div class="btn" id="add-btn"><img src='/img/다운로드.jpg'>
                     <div class="modal" id="modal">
                       <div class="modal_body">
                         <div class="m_head">
                           <div class="modal_title">🧺세탁물 수거페이지🧺</div>
                           <div class="close_btn" id="close_btn">X</div>
                         </div>
-                        <div class="m_body">
-                            <nav class="input-table1">
+                        <nav class="input-table1">
                               <div class="mb-3" id="nickName" >
                                 <!-- <label for="exampleInputEmail1" class="form-label">닉네임</label> -->
                                 <!-- <input type="email" class="form-control" id="exampleInputEmail1" placeholder="닉네임" aria-describedby="emailHelp"> -->
                               </div>
                               <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingOne">
+                                  <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                       전화번호
                                     </button>
@@ -234,28 +229,28 @@ $(document).on('click', '#close_btn', function (e) {
                             
                               <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingOne">
+                                  <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                       주소
                                     </button>
                                   </h2>
                                   <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                      ${address}1111111111111111111
+                                      ${address}
                                     </div>
                                   </div>
                                 </div>
                               </div>
                               <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingOne">
+                                  <h2 class="accordion-header" >
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                       요청사항
                                     </button>
                                   </h2>
                                   <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                      ${ask}1111111111111111111
+                                      ${ask}
                                     </div>
                                   </div>
                                 </div>
@@ -268,10 +263,8 @@ $(document).on('click', '#close_btn', function (e) {
                                 <button type="button" class="btn btn-dark" style="width:300px"  onclick="update_order()">신청하기</button>
                               </div>
                             </nav>
-                        </div>
                       </div>
-                    </div>
-  
+                  </div>
 `
                     
                     
@@ -288,25 +281,6 @@ $(document).on('click', '#close_btn', function (e) {
       $("#alertModal .btn-confirm").click(confirmCallback);
     }
   }
-  function update_order() {
-        const status = "대기중"
-
-        $.ajax({
-          type: "PUT",
-          url: `/api/order/guest?login_id=${login_id}`,
-          data: {
-            status: status
-          },
-          success: function (response) {
-            alert(JSON.stringify(response))
-              window.location.replace(`/mypage/guest?login_id=${login_id}`);
-          },
-          error: function (error) {
-            customAlert(error.responseJSON.errorMessage);
-          },
-        });
-      };
-
 </script>
 </body>
 </html>
