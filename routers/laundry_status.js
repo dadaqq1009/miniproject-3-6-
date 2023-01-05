@@ -14,7 +14,7 @@ router.put('/laundry/status/owner', async (req, res) => {
         });
         const ownerPk = owner.owner_id
 
-        const cloth = await Cloth.findOne({where: {owner_id : ownerPk , status : {[Op.not]: "배송완료"}  }});
+        const cloth = await Cloth.findOne({where: {owner_id : ownerPk , status : {[Op.notIn]: ["리뷰중", "리뷰완료", "배송완료"]}  }});
         await cloth.update( {status: status});
 
         return res.json({"message": "세탁물 상태가 변경되었습니다."});

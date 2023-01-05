@@ -105,11 +105,48 @@ alert("취소를 누르셨습니다.");
   };
 
   function laundryStatus(login_id){
-    window.location.href = `/laundry/status/owner?login_id=${login_id}`
+
+    $.ajax({
+    type: "GET",
+    url: `/api/mypage/owner?login_id=${login_id}`,
+
+    success: function (response) {
+
+
+      if (!response.cloth.length){
+          alert("빨래를 수거해주세요")
+      }
+      else{ window.location.href = `/laundry/status/owner?login_id=${login_id}`};
+
+
+    },
+    error: function (error) {
+            customAlert(error.responseJSON.errorMessage);
+          },
+  });
   };
   
   function orderCollect(login_id){
-    window.location.href = `/order/owner?login_id=${login_id}`
+
+    $.ajax({
+    type: "GET",
+    url: `/api/mypage/owner?login_id=${login_id}`,
+
+    success: function (response) {
+
+
+      if (response.cloth.length){
+          alert("주문이 이미 있습니다.")
+      }
+      else{ window.location.href = `/order/owner?login_id=${login_id}`};
+
+
+    },
+    error: function (error) {
+            customAlert(error.responseJSON.errorMessage);
+          },
+  });
+    
   };
 
   function reviewPage(login_id){

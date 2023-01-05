@@ -76,11 +76,17 @@ function getGuestPage(login_id) {
     // },
     success: function (response) {
 
+
       let temp_html = `
       <button type="button" class="btn btn-success">닉네임: ${response.guestName}</button>
       <button type="button" class="btn btn-success">마이포인트: ${response.guestPoint}</button>
       <button type="button" class="btn btn-success" onclick="signOut()">로그아웃</button>`
       $('#guestInfo').append(temp_html)
+
+
+
+      
+
     // callback(response);
     },
     error: function (error) {
@@ -94,12 +100,50 @@ function getGuestPage(login_id) {
       };
 
   function orderStatus(login_id){
-    window.location.href = `/order/status/guest?login_id=${login_id}`
+    $.ajax({
+    type: "GET",
+    url: `/api/mypage/guest?login_id=${login_id}`,
+
+    success: function (response) {
+
+
+      if (!response.cloth.length){
+          alert("빨래가 없습니다!")
+      }
+      else{window.location.href = `/order/status/guest?login_id=${login_id}`};
+
+
+    },
+    error: function (error) {
+            customAlert(error.responseJSON.errorMessage);
+          },
+  });
   };
 
   function order(login_id){
-    window.location.href = `/order/guest?login_id=${login_id}`
-  };
+
+    $.ajax({
+    type: "GET",
+    url: `/api/mypage/guest?login_id=${login_id}`,
+
+    success: function (response) {
+
+
+      if (response.cloth.length){
+          alert("다른 빨래가 끝나길 기다려주세요")
+      }
+      else{window.location.href = `/order/guest?login_id=${login_id}`};
+
+
+    },
+    error: function (error) {
+            customAlert(error.responseJSON.errorMessage);
+          },
+  });
+
+};
+    
+
 
 
   function signOut() {

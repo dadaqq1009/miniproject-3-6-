@@ -148,9 +148,13 @@
         updateStatus(status, login_id);
     });
     buttonC.addEventListener("click", function(){
-        buttonC.disabled = true;
+        
+        if (confirm("배송을 완료하셨나요?")){
+          buttonC.disabled = true;
         const status = "배송완료"
         updateStatus(status, login_id);
+          window.location.href = `/mypage/owner?login_id=${login_id}`}
+        
     });
 
 

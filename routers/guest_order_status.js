@@ -17,7 +17,7 @@ router.get('/order/status/guest',async (req, res) => {
           where: { login_id : guestId },
         });
         const guestPk = guest.guest_id;
-        const cloth = await Cloth.findOne({where: {guest_id : guestPk, status : {[Op.notIn]: ["리뷰중", "리뷰완료"]}, owner_id : {[Op.not]: null}}});
+        const cloth = await Cloth.findOne({where: {guest_id : guestPk, status : {[Op.notIn]: ["리뷰중", "리뷰완료"]}}});
         const clothStatus = cloth.status;
 
         return res.json({"clothStatus" : clothStatus});
@@ -35,8 +35,9 @@ router.get('/order/status/guest',async (req, res) => {
             where: { login_id : guestId },
           });
           const guestPk = guest.guest_id;
-          const cloth = await Cloth.findOne({where: {guest_id : guestPk, status : {[Op.notIn]: ["리뷰중", "리뷰완료"]}, owner_id : {[Op.not]: null}}});
-          
+          const cloth = await Cloth.findOne({where: {guest_id : guestPk, status : {[Op.in]: ["배송완료"]}, owner_id : {[Op.not]: null}}});
+          console.log(1111)
+          console.log(cloth)
           await cloth.update( {status: status});
   
           return res.json({"message": "이용해주셔서 감사합니다!"});
