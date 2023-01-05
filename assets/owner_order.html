@@ -197,6 +197,7 @@ $(document).on('click', '#close_btn', function (e) {
                     let address = rows[i]['address']
                     let ask = rows[i]['ask']
                     let name = name_rows[i]
+                    let clothId = rows[i]['cloth_id']
                     
                     temp_html += `
                     <div>${name}</div>
@@ -260,20 +261,39 @@ $(document).on('click', '#close_btn', function (e) {
                               <img id="preview" src="https://web.ipca.pt/sap/wp-content/codevision/resources/images/no-image.jpg">
                               <input type="file" id="inputFile" onchange="readURL(this);" style="display:none;">
                               <div id="button-req">
-                                <button type="button" class="btn btn-dark" style="width:300px"  onclick="update_order()">신청하기</button>
+                                <button type="button" class="btn btn-dark" style="width:300px"  onclick="save_order(${clothId})">신청하기</button>
                               </div>
                             </nav>
                       </div>
                   </div>
-`
-                    
-                    
+`         
                 }
                 
                 $('#order-box').append(temp_html)
             }
         });
     }
+
+    function save_order(clothId) {
+
+      console.log(clothId)
+
+        $.ajax({
+          type: "PUT",
+          url: `/api/order/owner?login_id=${login_id}`,
+          data: {
+            cloth_id : clothId
+          },
+          success: function (response) {
+            alert(JSON.stringify(response))
+              window.location.replace(`/mypage/owner?login_id=${login_id}`);
+
+          },
+          error: function (error) {
+            customAlert(error.responseJSON.errorMessage);
+          },
+        });
+      };
     function customAlert(text, confirmCallback) {
     $("#alertText").text(text);
     $("#alertModal").modal("show");
