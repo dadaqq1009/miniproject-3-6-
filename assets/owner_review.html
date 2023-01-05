@@ -66,6 +66,7 @@ body{background-image:url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistor
 <body>
 <div class="flex_center">
   <h1 style="position:absolute; top:100px; text-align:center;">🧺리뷰 확인🧺</h1>
+  <button type="button" class="btn btn-success" onclick="myPage()">마이페이지</button>
   </nav>
   <div class="mb-4" id="review_card" style="width:calc(72rem + 177px); margin:150px 0 0 0;">
       <div class="card" style="width: 18rem;">
@@ -190,6 +191,8 @@ body{background-image:url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistor
           $("#alertModal .btn-confirm").click(confirmCallback);
         }
       }
+      function myPage(login_id){
+    window.location.href = `/mypage/owner?login_id=${login_id}`}
     </script>
 </body>
 </html>

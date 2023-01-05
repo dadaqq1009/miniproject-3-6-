@@ -31,7 +31,7 @@ router.get('/review/owner', async(req,res) =>{
 
 
     
-    const review = await Review.findAll({where: {owner_id : owner_id }});
+  const review = await Review.findAll({where: {owner_id : owner_id }});
 
    let rows = review
 

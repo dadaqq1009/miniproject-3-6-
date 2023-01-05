@@ -10,272 +10,303 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+        <script src="./jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
+	<script src="./bootstrapt/js/bootstrap.min.js"></script>
     
 </head>
 <style>
-    .wrapper {
-    display: flex;
-    height: 400px;
-    justify-content: center;
-    align-items: center;
+html,body{width:100%; height:100%;}
+.form-control{height:40px; width:300px;}
+.flex_center{display:flex; align-items:center; justify-content:center; width:100%; height:100%;}
+nav{display:block; float:left;}
+.image-table{padding-left:10px;}
+#button-req{padding-top:10px;}
+.modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: none;
+
+        background-color: rgba(0, 0, 0, 0.4);
 }
 
-.team {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.modal.show {
+        display: block;
 }
 
-.team-item {
-    flex-basis: 350px;
-    flex-shrink: 0;
-    margin: 0 4px;
-    opacity: 0.4;
-    transition: all .4s;
+.modal_body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        width: 800px;
+        height: 600px;
+
+        /* padding: 40px; */
+
+        /* text-align: center; */
+
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+        transform: translateX(-50%) translateY(-50%);
 }
-
-.team-item:hover {
-    opacity: 1;
-    flex-basis: 300px;
-    margin: 0 20px;
+.m_head{
+        height: 10%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        background-color:#e7e5e5;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
 }
-
-.team-item img {
-    width: 100%;
+.m_body{
+        height: 100%;
+        padding: 20px;
+        margin-left : 50px;
 }
-
-.profile {
-    background-color: #222;
-    position: relative;
-    overflow: hidden;
+.m_footer{
+        height: 10%;
+        padding: 15px;
+        background-color:#e7e5e5;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        display: flex;
+        justify-content: end;
 }
-
-.profile:before {
-    content: ' ';
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.95+100 */
-    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.95) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.95) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.95) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#f2000000', GradientType=0); /* IE6-9 */
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 200px;
+.modal_title{
+        font-size: 18px;
+        color: gray;
+        font-weight: 500;
 }
-
-.profile_red {
-    color: #ff4949;
+.close_btn{
+        font-size: 20px;
+        color: rgb(139, 139, 139);
+        font-weight: 900;
+        cursor: pointer;
 }
-
-.profile_beige {
-    color: beige;
+      .modal_label{
+        padding-top: 10px;
 }
-
-.profile_green {
-    color: darkseagreen;
+.input_box{
+        width: 100%;
+        border: 1px solid rgb(189, 189, 189);
+        height: 30px;
 }
-
-.profile_pink {
-    color: pink;
+.modal_btn{
+        width: 80px;
+        height: 30px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bolder;
+        padding-top: 5px;
+        margin-left: 5px;
+        font-family: sans-serif;
 }
-
-.profile_purple {
-    color: violet;
+.cancle{
+        background-color: white;
+        color: black;
 }
-
-.profile-contents {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    padding: 10px;
+.save{
+        background-color: rgb(50, 77, 158);
+        color: white;
 }
-
-.profile-contents h2 {
-    font-size: 17px;
-}
-
-.profile-contents h2 span {
-    display: block;
-    font-size: 10px;
-}
-
-.profile-contents p {
-    color: white;
-    font-size: 10px;
-    min-width: 140px;
-    max-height: 0;
-    overflow: hidden;
-    line-height: 1.2;
-    transition: all 1s;
-    opacity: 0;
-}
-
-.team-item:hover .profile-contents p {
-    opacity: 1;
-    transition-delay: .4s;
-    max-height: 6em;
-    margin-top: 0.4em;
-}
-
-ul {
-
-    list-style: none;
-
-}
-/* 모달창 시작 */
-.modal.in {
-    padding-right: 0 !important;
-}
-
-.modal-dialog {
-    width: 100%;
-    max-width: 1000px;
-    height: 100%;
-    padding: 0;
-    margin: 0 auto;
-}
-
-.modal-content {
-    height: 100%;
-    overflow: auto;
-}
-
-.modal-header {
-    margin-bottom: -60px;
-    position: relative;
-    z-index: 10;
-}
-
-.modal-body {
-    padding-top: 70px;
-    height: 100%;
-    margin: auto;
-}
-
-.modal-body .in-content {
-    border-width: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-
 .test{
-    display: flex;
-    height: 300px;
-    justify-content: center;
-    align-items: center;
+    width: 1200px;
+    margin : 20px auto 0px auto;
 }
+.input-table1 {
+  margin-top : 50px;
+}
+.accordion-item{
+  width: 300px;
+}
+*{margin:0; padding:0;}
+html,body{width:100%; height:100%;}
+.form-control{height:40px; width:300px;}
+body{background-image:url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg"); background-repeat:no-repeat; background-size:cover;}
+#preview{display:block; width:300px; height:300px; border-raidus:10px; margin-top: 30px;}
+.flex_center{display:flex; align-items:center; justify-content:center; width:100%; height:100%;}
+nav{display:block; float:left;}
+.image-table{padding-left:50px; margin-top: 40px;}
+#button-req{padding-top:10px;}
+
+
 
 </style>
 <body>
-    <div id="order-box">
+    <div id="order-box" class="test">
         
-</div>    
-        <script
-      src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
-    ></script>
+    </div>
+   
     <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
-      integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-    <!-- 모달창 처리 시작 -->
-        $('#myModal').on('shown.bs.modal', function () {
-          $('#myInput').trigger('focus')
-        })
-        // <!-- 모달창 처리 끝-->//
-        const url = window.location.search;
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+    integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    // click on 라벨 추가 모달 열기
+$(document).on('click', '#add-btn', function (e) {
+  console.log("click event");
+  $('#modal').addClass('show');
+
+});
+
+// 모달 닫기
+$(document).on('click', '#close_btn', function (e) {
+  console.log("click event");
+  $('#modal').removeClass('show');
+
+});
+  </script>
+<script>
+    const url = window.location.search;
     console.log(url)
     const url_split = url.split('=')
     const login_id = url_split[1]
     console.log(login_id);
     show_order(login_id);
-
-        function show_order(){
-            $.ajax({
-                type: "GET",
-                url: `/api/order/owner?login_id=${login_id}`,
-                data: {},
-                success: function (response) {
-                    console.log(response)
-                    let rows = response['cloth']
-                    for (let i =0; i < rows.length; i++){
-                        let tel = rows[i]['tel']
-                        let address = rows[i]['address']
-                        let ask = rows[i]['ask']
-                        console.log(tel,address,ask)
-                        let temp_html = `
-                        <div>
-            <div class="test">
-                <h1>닉네임</h1>
-            </div>
-        <div class="wrapper">
-                <ul class="team">
-                    <li class="team-item">
-                        <div class="profile profile_beige" class="modal_button" data-bs-toggle="modal"
-                             data-bs-target="#staticBackdrop02">
-                            <img type="button" class="modal_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop02"
-                                 src="{{ url_for('static', filename='img/team02.jpg')}}">
-                            <div class="profile-contents">
-                                <h2 style="font-size: 40px">빨래 <span style="font-size: 20px">Team Member</span></h2>
-                                <p style="font-size: 35px">세탁해줘요</p>
-                            </div>
-                        </div>
-                    </li>
+    function show_order(){
+        $.ajax({
+            type: "GET",
+            url: `/api/order/owner?login_id=${login_id}`,
+            data: {},
+            success: function (response) {
+               
+                let rows = response['cloth']
+                // let name_rows = response['guests']
+                console.log(rows)
+                let temp_html = ''
+                  for (let i =0; i < rows.length; i++){
+                    let tel = rows[i]['tel']
+                    let address = rows[i]['address']
+                    let ask = rows[i]['ask']
+                    // let guestName = name_rows[i]
                     
-                </ul>
-            </div>
-            </li>
-            <div class="modal fade" id="staticBackdrop02" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                    aria-labelledby="staticBackdropLabel02" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title" id="staticBackdropLabel01">상세페이지</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                                <div class="top02">    
-                                    <div class="item">
-                                        <h1>닉네임</h1>
-                                        <p>${tel}</p>
-                                        <p>${address}</p>
-                                        <p>세탁물사진</p>
-                                        <p>${ask}</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                <!-- 모달창 끝 -->
-                                </div>
-                        </div>
+                    
+                    temp_html += `
+                    <div class="btn" id="add-btn"><img src="require('../assets/img/다운로드.jpg')">
                     </div>
-                </div>  
-            </div>      
-        </div>
-    </div>`
-                        
-                        $('#order-box').append(temp_html)
-                    }
+                    <div class="modal" id="modal">
+                      <div class="modal_body">
+                        <div class="m_head">
+                          <div class="modal_title">🧺세탁물 수거페이지🧺</div>
+                          <div class="close_btn" id="close_btn">X</div>
+                        </div>
+                        <div class="m_body">
+                            <nav class="input-table1">
+                              <div class="mb-3" id="nickName" >
+                                <!-- <label for="exampleInputEmail1" class="form-label">닉네임</label> -->
+                                <!-- <input type="email" class="form-control" id="exampleInputEmail1" placeholder="닉네임" aria-describedby="emailHelp"> -->
+                              </div>
+                              <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      전화번호
+                                    </button>
+                                  </h2>
+                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                      ${tel}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            
+                              <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      주소
+                                    </button>
+                                  </h2>
+                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                      ${address}1111111111111111111
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      요청사항
+                                    </button>
+                                  </h2>
+                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                      ${ask}1111111111111111111
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </nav>
+                            <nav class="image-table">
+                              <img id="preview" src="https://web.ipca.pt/sap/wp-content/codevision/resources/images/no-image.jpg">
+                              <input type="file" id="inputFile" onchange="readURL(this);" style="display:none;">
+                              <div id="button-req">
+                                <button type="button" class="btn btn-dark" style="width:300px"  onclick="update_order()">신청하기</button>
+                              </div>
+                            </nav>
+                        </div>
+                      </div>
+                    </div>
+  
+`
+                    
+                    
                 }
-            });
-        }
-        function customAlert(text, confirmCallback) {
-        $("#alertText").text(text);
-        $("#alertModal").modal("show");
-        if (confirmCallback) {
-          $("#alertModal .btn-confirm").click(confirmCallback);
-        }
-      }
-    </script>
+                
+                $('#order-box').append(temp_html)
+            }
+        });
+    }
+    function customAlert(text, confirmCallback) {
+    $("#alertText").text(text);
+    $("#alertModal").modal("show");
+    if (confirmCallback) {
+      $("#alertModal .btn-confirm").click(confirmCallback);
+    }
+  }
+  function update_order() {
+        const status = "대기중"
+
+        $.ajax({
+          type: "PUT",
+          url: `/api/order/guest?login_id=${login_id}`,
+          data: {
+            status: status
+          },
+          success: function (response) {
+            alert(JSON.stringify(response))
+              window.location.replace(`/mypage/guest?login_id=${login_id}`);
+          },
+          error: function (error) {
+            customAlert(error.responseJSON.errorMessage);
+          },
+        });
+      };
+
+</script>
 </body>
 </html>
