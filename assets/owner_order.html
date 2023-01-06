@@ -204,7 +204,7 @@ $(document).on('click', '#close_btn', function (e) {
                     
                     temp_html += `
                     <div>${name}</div>
-                    <div class="btn" id="add-btn"><img src='../upload/SmartSelectImage_2022-12-19-20-48-19.png'>
+                    <div class="btn" id="add-btn"><img src='/img/다운로드.jpg'>
                     <div class="modal" id="modal">
                       <div class="modal_body">
                         <div class="m_head">
@@ -212,9 +212,19 @@ $(document).on('click', '#close_btn', function (e) {
                           <div class="close_btn" id="close_btn">X</div>
                         </div>
                         <nav class="input-table1">
-                              <div class="mb-3" id="nickName" >
-                                <!-- <label for="exampleInputEmail1" class="form-label">닉네임</label> -->
-                                <!-- <input type="email" class="form-control" id="exampleInputEmail1" placeholder="닉네임" aria-describedby="emailHelp"> -->
+                          <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      손님
+                                    </button>
+                                  </h2>
+                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                      ${name}
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                               <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
@@ -261,10 +271,10 @@ $(document).on('click', '#close_btn', function (e) {
                               </div>
                             </nav>
                             <nav class="image-table">
-                              <img id="preview" src="https://web.ipca.pt/sap/wp-content/codevision/resources/images/no-image.jpg">
+                              <img id="preview" src='${img}'>
                               <input type="file" id="inputFile" onchange="readURL(this);" style="display:none;">
                               <div id="button-req">
-                                <button type="button" class="btn btn-dark" style="width:300px"  onclick="save_order(${clothId})">신청하기</button>
+                                <button type="button" class="btn btn-dark" style="width:300px"  onclick="save_order(${clothId})">수거하기</button>
                               </div>
                             </nav>
                       </div>

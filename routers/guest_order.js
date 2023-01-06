@@ -7,7 +7,7 @@ const multer = require('multer');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './upload')
+    cb(null, './assets/img')
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -15,12 +15,12 @@ var storage = multer.diskStorage({
 })
 var upload = multer({ storage: storage })
 
-// const upload = multer({dest : './upload'})
+// const upload = multer({dest : '../assets/img'})
 
 const app = express();
 app.use(express.json());
 
-router.use('/image', express.static('./upload'));
+router.use('/img', express.static('./assets/img'));
 
 
   router.get('/order/guest', async (req, res) => {
@@ -49,7 +49,7 @@ router.use('/image', express.static('./upload'));
           const status =  "대기중"
           const guest_id = req.body.guest_id
 
-          const img = '/image/' + req.file.filename;
+          const img = '/img/' + req.file.filename;
           console.log(req.file.filename)
           await Cloth.create({tel, address,ask, status, guest_id, img});
     
