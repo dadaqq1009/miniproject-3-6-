@@ -17,12 +17,6 @@
     
 </head>
 <style>
-html,body{width:100%; height:100%;}
-.form-control{height:40px; width:300px;}
-.flex_center{display:flex; align-items:center; justify-content:center; width:100%; height:100%;}
-nav{display:block; float:left;}
-.image-table{padding-left:10px;}
-#button-req{padding-top:10px;}
 .modal {
         position: absolute;
         top: 0;
@@ -67,11 +61,7 @@ nav{display:block; float:left;}
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
 }
-.m_body{
-        height: 100%;
-        padding: 20px;
-        margin-left : 50px;
-}
+
 .m_footer{
         height: 10%;
         padding: 15px;
@@ -82,7 +72,7 @@ nav{display:block; float:left;}
         justify-content: end;
 }
 .modal_title{
-        font-size: 18px;
+        font-size: 25px;
         color: gray;
         font-weight: 500;
 }
@@ -123,27 +113,62 @@ nav{display:block; float:left;}
     width: 1200px;
     margin : 20px auto 0px auto;
 }
-.input-table1 {
-  margin-top : 50px;
+.input-table {
+  margin-top : 55px;
+  margin-left : 80px;
 }
 .accordion-item{
   width: 300px;
 }
 *{margin:0; padding:0;}
 html,body{width:100%; height:100%;}
-.form-control{height:40px; width:300px;}
 body{background-image:url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdByfl%2FbtrVf7i5Uq5%2FjJ5afu7vrUKkgNGmzP2kAk%2Fimg.jpg"); background-repeat:no-repeat; background-size:cover;}
-#preview{display:block; width:300px; height:300px; border-raidus:10px; margin-top: 30px;}
-.flex_center{display:flex; align-items:center; justify-content:center; width:100%; height:100%;}
+#preview{display:block; width:330px; height:330px; border-raidus:10px; margin-top: 30px;}
 nav{display:block; float:left;}
 .image-table{padding-left:50px; margin-top: 40px;}
 #button-req{padding-top:10px;}
+.test{
+  width: 1500px;
+  margin: 0 auto;
+  padding-top : 10px;
+  display: flex;
+  margin-top : 100px;
+  flex-wrap: wrap;
+  
+}
+.test2{
+  margin-right: 20px;
+  margin-left : 20px;
+  margin-bottom: 50px;
+}
 
+.test3 {
+  width: 300px;
+  text-align: center;
+  margin-left: 33px;
+  margin-bottom: 10px;
+}
+img{
+  width: 300px;
+}
+.btn-dark{
+  width: 330px;
+  height: 50px;
+}
+.top-bar2{
+  margin-left : 750px;
+  margin-top : 50px;
+  margin-bottom: 50px;
+}
 </style>
 <body>
+  <nav>
+    <h1 class="top-bar2">🧺사장님 주문 상태페이지🧺</h1>
+</nav>
     <div id="order-box" class="test">
         
     </div>
+  </nav>
    
     <script
     src="https://code.jquery.com/jquery-3.5.1.js"
@@ -203,82 +228,76 @@ $(document).on('click', '#close_btn', function (e) {
                     console.log(img)
                     
                     temp_html += `
-                    <div>${name}</div>
-                    <div class="btn" id="add-btn"><img src='/img/다운로드.jpg'>
-                    <div class="modal" id="modal">
-                      <div class="modal_body">
-                        <div class="m_head">
-                          <div class="modal_title">🧺세탁물 수거페이지🧺</div>
-                          <div class="close_btn" id="close_btn">X</div>
-                        </div>
-                        <nav class="input-table1">
-                          <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                      손님
-                                    </button>
-                                  </h2>
-                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      ${name}
+                    <div>
+                    <input class="form-control test3" type="text" value="${name}" aria-label="Disabled input example" disabled readonly>
+                    <div class="btn test2" id="add-btn">
+                      <img src='/img/다운로드.jpg'>
+                        <div class="modal" id="modal">
+                          <div class="modal_body">
+                                <div class="m_head">
+                                  <div class="modal_title">🧺세탁물 수거페이지🧺</div>
+                                  <div class="close_btn" id="close_btn">X</div>
+                                </div>
+                            <nav class="input-table">
+                                  <div class="mb-3" id="nickName" >
+                                    <!-- <label for="exampleInputEmail1" class="form-label">닉네임</label> -->
+                                    <!-- <input type="email" class="form-control" id="exampleInputEmail1" placeholder="닉네임" aria-describedby="emailHelp"> -->
+                                  </div>
+                                  <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          전화번호
+                                        </button>
+                                      </h2>
+                                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                          ${tel}
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
-                              <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                      전화번호
-                                    </button>
-                                  </h2>
-                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      ${tel}
+                                
+                                  <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          주소
+                                        </button>
+                                      </h2>
+                                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                          ${address}
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
-                            
-                              <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                      주소
-                                    </button>
-                                  </h2>
-                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      ${address}
+                                  <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                      <h2 class="accordion-header" >
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          요청사항
+                                        </button>
+                                      </h2>
+                                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                          ${ask}
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
-                              <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" >
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                      요청사항
-                                    </button>
-                                  </h2>
-                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      ${ask}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </nav>
-                            <nav class="image-table">
+                                </nav>
+                                <nav class="image-table">
                               <img id="preview" src='${img}'>
                               <input type="file" id="inputFile" onchange="readURL(this);" style="display:none;">
                               <div id="button-req">
                                 <button type="button" class="btn btn-dark" style="width:300px"  onclick="save_order(${clothId})">수거하기</button>
                               </div>
                             </nav>
-                      </div>
-                  </div>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
 `         
                 }
                 
