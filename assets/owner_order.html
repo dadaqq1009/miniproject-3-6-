@@ -198,10 +198,13 @@ $(document).on('click', '#close_btn', function (e) {
                     let ask = rows[i]['ask']
                     let name = name_rows[i]
                     let clothId = rows[i]['cloth_id']
+                    let img = rows[i]['img']
+
+                    console.log(img)
                     
                     temp_html += `
                     <div>${name}</div>
-                    <div class="btn" id="add-btn"><img src='/img/다운로드.jpg'>
+                    <div class="btn" id="add-btn"><img src='../upload/SmartSelectImage_2022-12-19-20-48-19.png'>
                     <div class="modal" id="modal">
                       <div class="modal_body">
                         <div class="m_head">

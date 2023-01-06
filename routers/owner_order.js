@@ -5,6 +5,8 @@ const {Guest} = require('../models');
 const {Cloth} = require('../models');
 const {Owner} = require('../models');
 
+router.use('/image', express.static('./upload'));
+
 router.get('/order/owner', async(req,res) =>{
     try {
         // const  ownerId =  String( req.query.login_id )
@@ -13,6 +15,9 @@ router.get('/order/owner', async(req,res) =>{
         // const owner_id = owner.owner_id
 
         const cloth = await Cloth.findAll({where: {owner_id : null}});
+
+        console.log(4444)
+         console.log(typeof cloth[0]['img'])
 
       let rows = cloth
 

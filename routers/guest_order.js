@@ -3,13 +3,19 @@ const router = express.Router();
 const {Op} = require('sequelize');
 const {Cloth} = require("../models");
 const {Guest} = require("../models");
-
-
-
-
 const multer = require('multer');
 
-const upload = multer({dest : './upload'})
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './upload')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
+
+// const upload = multer({dest : './upload'})
 
 const app = express();
 app.use(express.json());
@@ -36,7 +42,7 @@ router.use('/image', express.static('./upload'));
 
     router.post('/order/guest',  upload.single("img"),  async (req, res) => {
       try { 
-          console.log(1)
+          
           const tel = req.body.tel
           const address = req.body.address
           const ask = req.body.ask
@@ -44,6 +50,7 @@ router.use('/image', express.static('./upload'));
           const guest_id = req.body.guest_id
 
           const img = '/image/' + req.file.filename;
+          console.log(req.file.filename)
           await Cloth.create({tel, address,ask, status, guest_id, img});
     
           const guest = await Guest.findOne({where : {guest_id : guest_id}});
