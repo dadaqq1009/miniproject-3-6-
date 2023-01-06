@@ -229,7 +229,7 @@ $(document).on('click', '#close_btn', function (e) {
                     
                     temp_html += `
                     <div>
-                    <input class="form-control test3" type="text" value="${name}" aria-label="Disabled input example" disabled readonly>
+                      <input class="form-control test3" type="text" value="닉네임 : ${name}" aria-label="Disabled input example" disabled readonly>
                     <div class="btn test2" id="add-btn">
                       <img src='/img/다운로드.jpg'>
                         <div class="modal" id="modal">
@@ -239,10 +239,7 @@ $(document).on('click', '#close_btn', function (e) {
                                   <div class="close_btn" id="close_btn">X</div>
                                 </div>
                             <nav class="input-table">
-                                  <div class="mb-3" id="nickName" >
-                                    <!-- <label for="exampleInputEmail1" class="form-label">닉네임</label> -->
-                                    <!-- <input type="email" class="form-control" id="exampleInputEmail1" placeholder="닉네임" aria-describedby="emailHelp"> -->
-                                  </div>
+                              <input class="form-control" type="text" value="닉네임 : ${name}" aria-label="Disabled input example" disabled readonly>
                                   <div class="accordion" id="accordionExample">
                                     <div class="accordion-item">
                                       <h2 class="accordion-header">
@@ -291,7 +288,7 @@ $(document).on('click', '#close_btn', function (e) {
                               <img id="preview" src='${img}'>
                               <input type="file" id="inputFile" onchange="readURL(this);" style="display:none;">
                               <div id="button-req">
-                                <button type="button" class="btn btn-dark" style="width:300px"  onclick="save_order(${clothId})">수거하기</button>
+                                <button type="button" class="btn btn-dark"  onclick="save_order(${clothId})">수거하기</button>
                               </div>
                             </nav>
                           </div>
@@ -299,7 +296,7 @@ $(document).on('click', '#close_btn', function (e) {
                     </div>
                     </div>
 `         
-                }
+                } 
                 
                 $('#order-box').append(temp_html)
             }
